@@ -1,19 +1,46 @@
 package com.tp2.leapyear;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("Leap Year Tests")
 class LeapYearTest {
 
-    // TODO: Replace these lines with your tests
-    @Test
-    void exampleTest(){
-        assertEquals(4, 2 + 1);
+    private LeapYear leapYear;
+
+    @BeforeEach
+    void setUp() {
+        leapYear = new LeapYear();
     }
 
-//    Missing tests:
-//
-//- A year is a leap year if it is divisible by 4
-//- A year is not a leap year if it is divisible by 100
-//- A year is a leap year if it is divisible by 400
+    @Test
+    @DisplayName("Paso 1: Caso base")
+    void yearNotDivisibleBy4IsNotLeap() {
+        assertFalse(leapYear.isLeap(2001));
+        assertFalse(leapYear.isLeap(2003));
+    }
+
+    @Test
+    @DisplayName("Paso 2: Divisible por 4")
+    void yearIsLeapIfDivisibleBy4() {
+        assertTrue(leapYear.isLeap(2004));
+        assertTrue(leapYear.isLeap(1996));
+    }
+
+    @Test
+    @DisplayName("Paso 3: Divisible por 100")
+    void yearIsNotLeapIfDivisibleBy100ButNot400() {
+        assertFalse(leapYear.isLeap(1900));
+        assertFalse(leapYear.isLeap(1800));
+    }
+
+    @Test
+    @DisplayName("Paso 4: Divisible por 400")
+    void yearIsLeapIfDivisibleBy400() {
+        assertTrue(leapYear.isLeap(2000));
+        assertTrue(leapYear.isLeap(1600));
+    }
 }
